@@ -3,8 +3,6 @@ var jwt = require( 'jwt-simple' );
 var auth = {
  
 	login: function( req, res ) {
-
-		console.log("req for auth");
  
 		var username = req.body.username || '';
     	var password = req.body.password || '';
@@ -47,7 +45,9 @@ var auth = {
     	var dbUserObj = { 
       		name: 'deepak',
       		role: 'admin',
-      		username: 'deepak@deepakverma.com.au'
+      		username: 'deepak@deepakverma.com.au',
+      		pass: 'pass123'
+
     	};
  		return dbUserObj;
   	},
