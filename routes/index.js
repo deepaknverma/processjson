@@ -11,6 +11,6 @@ router.post('/login', auth.login);
 /*
 * Routes that can be accessed only by autheticated users
 */
-router.get('/api/v1/items', items.getAll);
+router.post('/api/v1/items', items.getAll);
 
 module.exports = router;
