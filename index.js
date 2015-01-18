@@ -1,13 +1,51 @@
-var express = require('express')
-var app = express();
-var cool = require('cool-ascii-faces');
+var fs 			= require( 'fs' );
+var logger 		= require( 'morgan' );
+var jwt 		= require( 'jwt-simple' );
+var bodyParser 	= require( 'body-parser' );
+var express 	= require( 'express' );
+var app 		= express();
 
-app.set('port', (process.env.PORT || 5000))
+app.use( logger( 'dev' ) );
+app.use( bodyParser.json() );
 
-app.get('/', function(request, response) {
-  response.send(cool());
+app.all('/*', function( req, res, next ) {
+
+	// CORS headers
+	res.header( "Access-Control-Allow-Origin", "*" ); // restrict it to the required domain
+	res.header( 'Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS' );
+	
+	// Set custom headers for CORS
+	res.header( 'Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key' );
+
+	if ( req.method == 'OPTIONS' ) {
+
+		res.status( 200 ).end();
+
+	} else {
+
+		next();
+
+	}
+
 });
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+// This will check if the token is valid
+// Only the requests that start with /api/v1/* will be checked for the token.
+// Any URL's that do not follow the below pattern should be avoided unless you
+// are sure that authentication is not needed
+app.all('/api/v1/*', [require('./middleware/validateRequest')]);
+
+app.use('/', require('./routes'));
+
+// If no route is matched by now, it must be a 404
+app.use( function( req, res, next ) {
+	var err = new Error( 'Not Found' );
+	err.status = 404;
+	next( err );
+});
+
+app.set('port', ( process.env.PORT || 3000 ) )
+
+app.listen( app.get( 'port' ), function() {
+  console.log( "Node app is running at localhost:" + app.get( 'port' ) )
+});
