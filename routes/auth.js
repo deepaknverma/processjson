@@ -3,6 +3,8 @@ var jwt = require( 'jwt-simple' );
 var auth = {
  
 	login: function( req, res ) {
+
+		console.log("req for auth");
  
 		var username = req.body.username || '';
     	var password = req.body.password || '';
@@ -79,9 +81,10 @@ function genToken( user ) {
   	};
 }
  
-function expiresIn(numDays) {
-  var dateObj = new Date();
-  return dateObj.setDate(dateObj.getDate() + numDays);
+function expiresIn( numDays ) {
+
+  	var dateObj = new Date();
+  	return dateObj.setDate(dateObj.getDate() + numDays);
 }
  
 module.exports = auth;

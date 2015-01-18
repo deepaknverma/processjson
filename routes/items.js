@@ -1,6 +1,7 @@
 var items = {
  
   getAll: function(req, res) {
+  	console.log("reached items");
     var allitems = data; // Spoof a DB call
     res.json(allitems);
   },
