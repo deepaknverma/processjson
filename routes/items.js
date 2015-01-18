@@ -13,7 +13,7 @@ var items = {
   },
 };
  
-
+// Processing json request
 function process_json( requestJson ){
 
 	var result 			= [];

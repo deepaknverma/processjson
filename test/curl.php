@@ -1,8 +1,8 @@
 <?php
 $payload = file_get_contents('../payload.json');
 
-$request_url 	= "http://127.0.0.1/api/v1/items"; 						// api url
-$auth_url 		= "http://127.0.0.1/login";								// login url
+$request_url 	= "https://processjson.herokuapp.com/api/v1/items"; 						// api url
+$auth_url 		= "https://processjson.herokuapp.com/login";								// login url
 
 // data for auth
 $auth_data 	= array(
@@ -27,7 +27,7 @@ function curl_api( $url, $data ){
 	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");  
 	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));  
 	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_PORT, $port);
+	//curl_setopt($ch, CURLOPT_PORT, $port);
 	  
 	$result 	= curl_exec($ch);  
 	$ch_error 	= curl_error($ch);
