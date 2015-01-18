@@ -1,0 +1,30 @@
+{
+  "name": "processjson",
+  "version": "0.1.0",
+  "description": "Experimenting with node to accept json, parse and reply with appropriate data",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "dependencies": {
+    "express": "4.11.0",
+    "cool-ascii-faces": "1.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deepak-blackswan/processjson.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "json",
+    "api"
+  ],
+  "author": "Deepak verma <deepakverma@netbeam.com.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deepak-blackswan/processjson/issues"
+  },
+  "homepage": "https://github.com/deepak-blackswan/processjson",
+  "engine": "node >= 0.10.35"
+}
