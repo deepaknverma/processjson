@@ -7,6 +7,9 @@ var app 		= express();
 app.use( logger( 'dev' ) );
 app.use( bodyParser.json() );
 
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }))
+
 app.all( '/*', function( req, res, next ) {
 
 	// CORS headers
@@ -26,13 +29,13 @@ app.all( '/*', function( req, res, next ) {
 
 	}
 
-});
+}); 
 
 // Check if the token is valid
 // Only the requests that start with /api/v1/* will be checked for the token.
 // Any URL's that do not follow the below pattern should be avoided unless you 
 // are sure that authentication is not needed
-app.all( '/api/v1/*', [require( './middleware/validateRequest' )] );
+// app.all( '/api/v1/*', [require( './middleware/validateRequest' )] );
 
 app.use( '/', require( './routes' ) );
 
@@ -40,7 +43,7 @@ app.use( '/', require( './routes' ) );
 app.use( function( req, res, next ) {
 	
 	var err = new Error( 'Not Found' );
-	err.status = 404;
+	err.status = 400;
 	next( err );
 
 });
