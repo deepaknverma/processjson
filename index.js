@@ -41,8 +41,8 @@ app.use( '/', require( './routes' ) );
 
 // If no route is matched by now, it must be a 404
 app.use( function( req, res, next ) {
-	
-	var err = new Error( 'Not Found' );
+	var err = new Error( 'Could not decode request: JSON parsing failed' );
+	//var err = new Error( 'Not Found' );
 	err.status = 400;
 	next( err );
 
